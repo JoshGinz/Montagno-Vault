@@ -759,9 +759,6 @@ var main = (function($) { var _ = {
 	},
 
 
-	// main.js
-	import { firebaseConfig } from './Test.js'; // Adjust the path to Test.js if necessary
-
 
 	
 	document.getElementById('uploadForm').addEventListener('submit', function(e) {
