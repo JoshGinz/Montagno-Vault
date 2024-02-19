@@ -97,7 +97,7 @@ function loginUser(email, password) {
             // Signed in 
             var user = userCredential.user;
             // Redirect to a new index page or dashboard
-            window.location.href = 'new-index.html'; // Replace with the actual path to your new index or dashboard page
+            window.location.href = 'JoshGinz/Montagno-Vault/indexupload.html'; // Replace with the actual path to your new index or dashboard page
         })
         .catch((error) => {
             var errorCode = error.code;
@@ -115,6 +115,17 @@ document.getElementById('loginButton').addEventListener('click', function(e) {
     const loginPassword = document.getElementById('loginPassword').value;
     loginUser(loginEmail, loginPassword);
 });
+
+firebase.auth().onAuthStateChanged(function(user) {
+	if (user) {
+	  // User is signed in, redirect to the dashboard
+	  window.location.href = 'JoshGinz/Montagno-Vault/indexupload.html';
+	} else {
+	  // No user is signed in
+	  // Keep or render the login functionality
+	}
+  });
+  
 
 
 var main = (function($) { var _ = {
