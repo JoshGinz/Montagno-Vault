@@ -743,4 +743,68 @@ var main = (function($) { var _ = {
 
 	},
 
+	// Paste your Firebase configuration
+	const firebaseConfig = {
+		apiKey: "AIzaSyBYdwCHWcfDGZx1TPt_e1VsGJJtPDV6Y6U",
+		authDomain: "montagno-vault.firebaseapp.com",
+		projectId: "montagno-vault",
+		storageBucket: "montagno-vault.appspot.com",
+		messagingSenderId: "1075290100416",
+		appId: "1:1075290100416:web:098aa6074db06993ccd325",
+		measurementId: "G-9MS9DTPWW5"
+	};
+	
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+	
+
+	document.getElementById('uploadForm').addEventListener('submit', function(e) {
+		e.preventDefault();
+	  
+		const imageFile = document.getElementById('imageUpload').files[0];
+		const title = document.getElementById('titleInput').value;
+		const description = document.getElementById('descriptionInput').value;
+		const storageRef = firebase.storage().ref(`images/${imageFile.name}`);
+		const db = firebase.firestore();
+	  
+		storageRef.put(imageFile).then((snapshot) => {
+		  return snapshot.ref.getDownloadURL();
+		}).then((url) => {
+		  return db.collection('articles').add({
+			title,
+			description,
+			imageUrl: url,
+			thumbUrl: url // Consider generating a thumbnail for efficiency
+		  });
+		}).then(() => {
+		  console.log('Article uploaded successfully');
+		  // Optionally, refresh the articles displayed on the front page
+		}).catch((error) => {
+		  console.error('Error uploading article: ', error);
+		});
+	  });
+	  
+
+	  document.addEventListener('DOMContentLoaded', function() {
+		const db = firebase.firestore();
+		const articlesContainer = document.getElementById('articlesContainer'); // Ensure this container is in your HTML
+	  
+		db.collection('articles').get().then((querySnapshot) => {
+		  querySnapshot.forEach((doc) => {
+			const data = doc.data();
+			const articleHtml = `
+			  <article>
+				<a class="thumbnail" href="${data.imageUrl}" data-position="left center"><img src="${data.thumbUrl}" alt="" /></a>
+				<h2>${data.title}</h2>
+				<p>${data.description}</p>
+			  </article>
+			`;
+			articlesContainer.innerHTML += articleHtml;
+		  });
+		});
+	  });
+	  
+
+  
+
 }; return _; })(jQuery); main.init();
