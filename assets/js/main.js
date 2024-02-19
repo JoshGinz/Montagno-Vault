@@ -743,7 +743,6 @@ var main = (function($) { var _ = {
 
 	},
 
-	// Paste your Firebase configuration
 	const firebaseConfig = {
 		apiKey: "AIzaSyBYdwCHWcfDGZx1TPt_e1VsGJJtPDV6Y6U",
 		authDomain: "montagno-vault.firebaseapp.com",
