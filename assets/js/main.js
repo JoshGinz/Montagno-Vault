@@ -131,7 +131,7 @@ document.getElementById('submitLogin').addEventListener('click', function(e) {
 firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
 	  // User is signed in, redirect to the dashboard
-	  window.location.href = 'JoshGinz/Montagno-Vault/indexupload.html';
+	  window.location.href = 'indexupload.html';
 	} else {
 	  // No user is signed in
 	  // Keep or render the login functionality
