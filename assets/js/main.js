@@ -82,13 +82,25 @@ function loginUser(email, password) {
         });
 }
 
-// Assuming there's a form with 'email' and 'password' fields and a button with the ID 'loginButton'
-document.getElementById('loginButton').addEventListener('click', function(e) {
-    e.preventDefault(); // Prevent the default form submission
-    const loginEmail = document.getElementById('loginEmail').value;
-    const loginPassword = document.getElementById('loginPassword').value;
-    loginUser(loginEmail, loginPassword);
-});
+
+document.getElementById('loginButton').addEventListener('click', function() {
+	// Toggle visibility
+	document.getElementById('loginForm').style.display = 'block';
+	this.style.display = 'none'; // Hide the login button itself
+  });
+  
+  document.getElementById('submitLogin').addEventListener('click', function(e) {
+	e.preventDefault();
+	const email = document.getElementById('loginEmail').value;
+	const password = document.getElementById('loginPassword').value;
+	
+	// Call your login function here
+	loginUser(email, password);
+  });
+  
+  // Your existing loginUser function should handle authentication
+  // and toggle the visibility of the uploadBtn accordingly
+  
 
   // Get the modal
   var modal = document.getElementById('uploadModal');
