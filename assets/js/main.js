@@ -44,6 +44,32 @@ window.onclick = function(event) {
   }
 }
 
+// Function to log the user in using Firebase Authentication
+function loginUser(email, password) {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            // Signed in 
+            var user = userCredential.user;
+            // Redirect to a new index page or dashboard
+            window.location.href = 'new-index.html'; // Replace with the actual path to your new index or dashboard page
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // Display an error message to the user or log to console
+            console.error(errorMessage);
+            alert(errorMessage); // Alert the user about the error
+        });
+}
+
+// Assuming there's a form with 'email' and 'password' fields and a button with the ID 'loginButton'
+document.getElementById('loginButton').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent the default form submission
+    const loginEmail = document.getElementById('loginEmail').value;
+    const loginPassword = document.getElementById('loginPassword').value;
+    loginUser(loginEmail, loginPassword);
+});
+
 
 var main = (function($) { var _ = {
 
