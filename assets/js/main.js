@@ -17,51 +17,51 @@ const firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   
-  document.getElementById('uploadForm').addEventListener('submit', function(e) {
-	e.preventDefault();
-  
-	const imageFile = document.getElementById('imageUpload').files[0];
-	const title = document.getElementById('titleInput').value;
-	const description = document.getElementById('descriptionInput').value;
-	const storageRef = firebase.storage().ref(`images/${imageFile.name}`);
-	const db = firebase.firestore();
-  
-	storageRef.put(imageFile).then((snapshot) => {
-	  return snapshot.ref.getDownloadURL();
-	}).then((url) => {
-	  return db.collection('articles').add({
-		title,
-		description,
-		imageUrl: url,
-		thumbUrl: url // Consider generating a thumbnail for efficiency
+document.getElementById('uploadForm').addEventListener('submit', function(e) {
+		e.preventDefault();
+	  
+		const imageFile = document.getElementById('imageUpload').files[0];
+		const title = document.getElementById('titleInput').value;
+		const description = document.getElementById('descriptionInput').value;
+		const storageRef = firebase.storage().ref(`images/${imageFile.name}`);
+		const db = firebase.firestore();
+	  
+		storageRef.put(imageFile).then((snapshot) => {
+		  return snapshot.ref.getDownloadURL();
+		}).then((url) => {
+		  return db.collection('articles').add({
+			title,
+			description,
+			imageUrl: url,
+			thumbUrl: url // Consider generating a thumbnail for efficiency
+		  });
+		}).then(() => {
+		  console.log('Article uploaded successfully');
+		  // Optionally, refresh the articles displayed on the front page
+		}).catch((error) => {
+		  console.error('Error uploading article: ', error);
+		});
 	  });
-	}).then(() => {
-	  console.log('Article uploaded successfully');
-	  // Optionally, refresh the articles displayed on the front page
-	}).catch((error) => {
-	  console.error('Error uploading article: ', error);
-	});
-  });
-  
+	  
 
-  document.addEventListener('DOMContentLoaded', function() {
-	const db = firebase.firestore();
-	const articlesContainer = document.getElementById('articlesContainer'); // Ensure this container is in your HTML
-  
-	db.collection('articles').get().then((querySnapshot) => {
-	  querySnapshot.forEach((doc) => {
-		const data = doc.data();
-		const articleHtml = `
-		  <article>
-			<a class="thumbnail" href="${data.imageUrl}" data-position="left center"><img src="${data.thumbUrl}" alt="" /></a>
-			<h2>${data.title}</h2>
-			<p>${data.description}</p>
-		  </article>
-		`;
-		articlesContainer.innerHTML += articleHtml;
+	  document.addEventListener('DOMContentLoaded', function() {
+		const db = firebase.firestore();
+		const articlesContainer = document.getElementById('articlesContainer'); // Ensure this container is in your HTML
+	  
+		db.collection('articles').get().then((querySnapshot) => {
+		  querySnapshot.forEach((doc) => {
+			const data = doc.data();
+			const articleHtml = `
+			  <article>
+				<a class="thumbnail" href="${data.imageUrl}" data-position="left center"><img src="${data.thumbUrl}" alt="" /></a>
+				<h2>${data.title}</h2>
+				<p>${data.description}</p>
+			  </article>
+			`;
+			articlesContainer.innerHTML += articleHtml;
+		  });
+		});
 	  });
-	});
-  });
 
 var main = (function($) { var _ = {
 
@@ -802,33 +802,6 @@ var main = (function($) { var _ = {
 			_.hide();
 
 	},
-
-	// Get the modal
-	var modal = document.getElementById('uploadModal');
-
-	// Get the button that opens the modal
-	var btn = document.getElementById('uploadBtn');
-
-	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName('close')[0];
-
-	// When the user clicks the button, open the modal 
-	btn.onclick = function() {
-	modal.style.display = "block";
-	}
-
-	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
-	modal.style.display = "none";
-	}
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-	if (event.target == modal) {
-		modal.style.display = "none";
-	}
-	}
-
 
 
 
