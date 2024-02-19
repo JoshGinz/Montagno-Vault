@@ -29,7 +29,21 @@
 					<header id="header">
 						<h1>Montagno Family Vault</h1>
 						<button id="loginButton" class="button login-button">Log In</button>
-					</div>
+						<!-- Trigger/Open The Modal -->
+						<button id="uploadBtn" class="button">Upload Content</button>
+						<!-- The Modal -->
+						<div id="uploadModal" class="modal">
+						<!-- Modal content -->
+						<div class="modal-content">
+							<span class="close">&times;</span>
+							<form id="uploadForm">
+							<input type="file" id="imageUpload" accept="image/*" required>
+							<input type="text" id="titleInput" placeholder="Enter title" required>
+							<textarea id="descriptionInput" placeholder="Enter description" required></textarea>
+							<button type="submit" class="button">Upload</button>
+							</form>
+						</div>
+						</div>
 						<ul class="icons">
 							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
