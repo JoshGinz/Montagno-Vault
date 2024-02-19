@@ -89,14 +89,14 @@ document.getElementById('loginButton').addEventListener('click', function() {
 	this.style.display = 'none'; // Hide the login button itself
   });
   
-  document.getElementById('submitLogin').addEventListener('click', function(e) {
+document.getElementById('submitLogin').addEventListener('click', function(e) {
 	e.preventDefault();
 	const email = document.getElementById('loginEmail').value;
 	const password = document.getElementById('loginPassword').value;
 	
 	// Call your login function here
 	loginUser(email, password);
-  });
+});
   
   // Your existing loginUser function should handle authentication
   // and toggle the visibility of the uploadBtn accordingly
