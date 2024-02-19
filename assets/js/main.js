@@ -743,6 +743,7 @@ var main = (function($) { var _ = {
 
 	},
 
+		// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 	const firebaseConfig = {
 		apiKey: "AIzaSyBYdwCHWcfDGZx1TPt_e1VsGJJtPDV6Y6U",
 		authDomain: "montagno-vault.firebaseapp.com",
@@ -752,9 +753,6 @@ var main = (function($) { var _ = {
 		appId: "1:1075290100416:web:098aa6074db06993ccd325",
 		measurementId: "G-9MS9DTPWW5"
 	};
-	
-	// Initialize Firebase
-	firebase.initializeApp(firebaseConfig);
 	
 
 	document.getElementById('uploadForm').addEventListener('submit', function(e) {
